@@ -54,7 +54,7 @@ app.getWashroomsBySearchTerm = function (search) {
     })
         .then((results) => {
             const washroomArray = results;
-            // console.log(results);
+            console.log(results);
             app.displayWashroom(washroomArray);
         });
 }
@@ -64,18 +64,40 @@ app.displayWashroom = function(washrooms) {
     washrooms.forEach((washroom) => {
         const streetAddress = washroom.street.trim();
         const city = washroom.city.trim();
-
+        const accessibleStatus = washroom.accessible;
+        const unisexStatus = washroom.unisex;
+        const directions = washroom.directions;
+        const comment = washroom.comment;
+        const changeTableStatus = washroom.changing_table;
+        
         const $name = $('<h2>').text(washroom.name);
-        const $address = $('<p>').text(`${streetAddress}, ${city}`);
-        // const $directions = $('<p>').text(washroom.directions);
-        const $unisex = $('<p>').text(washroom.unisex);
-        const $accessible = $('<p>').text(washroom.accessible);
+        
+        // create map link
+        const washroomLat = washroom.latitude;
+        const washroomLong = washroom.longitude;
+        // const mapURL = `https://www.google.com/maps/search/?api=1&query=${washroomLat},${washroomLong}`;
+        const mapURL = `https://www.google.com/maps/search/?api=1&query=${streetAddress}+${city}`;
+        const $address = $('<p>').html(`<a href="${mapURL}" target="_blank">${streetAddress}, ${city}</a>`);
 
-       const $washroomContainer = $("<div>").append($name, $address);
+        // create features list and populate with features
+        const $featuresList = $('<ul>');
+        const $unisex = $('<li>').text(`Unisex: ${unisexStatus}`);
+        const $accessible = $('<li>').text(`Wheelchair accessible: ${accessibleStatus}`);
+        const $changeTable = $('<li>').text(`Change table: ${changeTableStatus}`);
+        $featuresList.append($unisex, $accessible, $changeTable);
+
+        const $washroomContainer = $("<div>").append($name, $address, $featuresList);
+        if(directions) {
+            $washroomContainer.append(`<p>Directions: ${directions}</p>`);
+        }
+        if (comment) {
+            $washroomContainer.append(`<p>Comments: ${comment}</p>`);
+        }
+
+        // append washroom container
        $('#washrooms').append($washroomContainer);
     });
 }
-
 
 
 app.events = function() {

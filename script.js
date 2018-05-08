@@ -80,47 +80,47 @@ app.displayWashroom = function(washrooms) {
         const $address = $('<p>').html(`<a href="${mapURL}" target="_blank">${streetAddress}, ${city}</a>`);
 
         // create features list and populate with features
-        const $featuresList = $('<ul>');
+        const $featuresList = $('<ul class="features">');
         const $unisex = $('<li>').text(`Unisex: ${unisexStatus}`);
         const $accessible = $('<li>').text(`Wheelchair accessible: ${accessibleStatus}`);
         const $changeTable = $('<li>').text(`Change table: ${changeTableStatus}`);
         $featuresList.append($unisex, $accessible, $changeTable);
 
-        const $washroomContainer = $("<div>").append($name, $address, $featuresList);
+        // put directions and comments into their own div so they can be shown or hidden
+        const $washroomInfo = $('<div class="more-info">');
         if(directions) {
-            $washroomContainer.append(`<p>Directions: ${directions}</p>`);
+            $washroomInfo.append(`<p>Directions: ${directions}</p>`);
         }
         if (comment) {
-            $washroomContainer.append(`<p>Comments: ${comment}</p>`);
+            $washroomInfo.append(`<p>Comments: ${comment}</p>`);
+        }
+        const $washroomContainer = $("<div>").append($name, $address, $featuresList);
+        if($washroomInfo.text().length > 0) {
+            $washroomContainer.append("<button class='toggle-more-info'>More info</button>");
+            $washroomContainer.append($washroomInfo);
         }
 
         // append washroom container
        $('#washrooms').append($washroomContainer);
+       $('.more-info').hide();
     });
 }
 
 
 app.events = function() {
-    
+
     $('#searchForm').on('submit', function(e) {
         e.preventDefault();
         const searchTerm = $(this).children('input[type=search]').val();
         app.getCoordinates(searchTerm);
+    });
+
+    $('#washrooms').on("click", ".toggle-more-info", function(e) {
+        e.stopPropagation();
+        e.preventDefault();        
+        $(this).next('.more-info').toggle();
     })
 }
-
-    // app.events = function () {
-    //     $('#animal').on('change', function () {
-    //         // console.log('hi')
-    //         const selectedAnimal = $(this).val();
-    //         // console.log(selectedAnimal);
-    //         app.getArt(selectedAnimal);
-    //         app.updateTitle();
-    //     });
-    // }
-
-
-
 
 // 2. create an init method
 app.init = function () {
@@ -129,5 +129,4 @@ app.init = function () {
 // 3. create a document ready to store it all in
 $(function () {
     app.init();
-
 });

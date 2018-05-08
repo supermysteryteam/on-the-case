@@ -114,6 +114,13 @@ app.displayWashroom = function(washrooms) {
     });
 }
 
+// add title for search result and update with search term
+app.updateSearchTitle = function(titleText) {
+    $('#searchTitle').remove();
+    const $searchResultTitle = $('<h2 id="searchTitle" class="search-title">').text(`Showing search results for ${titleText}`);
+    $('#washrooms').before($searchResultTitle);
+}
+
 
 app.events = function() {
 
@@ -121,6 +128,7 @@ app.events = function() {
         e.preventDefault();
         const searchTerm = $(this).children('input[type=search]').val();
         app.getCoordinates(searchTerm);
+        app.updateSearchTitle(searchTerm);
     });
 
     $('#washrooms').on("click", ".toggle-more-info", function(e) {

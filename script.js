@@ -20,19 +20,23 @@ app.getCoordinates = function (search) {
 }
 
 app.getWashroomsByCoords = function (latitude, longitude) {
+    const unisexVal = $('#unisex').prop('checked');
+    const accessibleVal = $('#accessible').prop('checked');
+    console.log(`Unisex: ${unisexVal}; Accessible: ${accessibleVal}`);
+
+
     $.ajax({
         url: 'https://www.refugerestrooms.org:443/api/v1/restrooms/by_location.json',
         dataType: 'json',
         data: {
-            ada: true,
-            unisex: true,
+            ada: accessibleVal,
+            unisex: unisexVal,
             lat: latitude,
             lng: longitude
         }
     })
          .then( (results) => {
             const washroomArray = results;
-            // console.log(results);
             app.displayWashroom(washroomArray);
         }); 
     }
@@ -57,11 +61,12 @@ app.getWashroomsBySearchTerm = function (search) {
 
 app.displayWashroom = function(washrooms) {
     $('#washrooms').empty();
-   // console.log(data)
     washrooms.forEach((washroom) => {
-       console.log(washroom.name);
+        const streetAddress = washroom.street.trim();
+        const city = washroom.city.trim();
+
         const $name = $('<h2>').text(washroom.name);
-        const $address = $('<p>').text(washroom.street);
+        const $address = $('<p>').text(`${streetAddress}, ${city}`);
         // const $directions = $('<p>').text(washroom.directions);
         const $unisex = $('<p>').text(washroom.unisex);
         const $accessible = $('<p>').text(washroom.accessible);

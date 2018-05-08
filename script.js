@@ -64,11 +64,6 @@ app.displayWashroom = function(washrooms) {
     washrooms.forEach((washroom) => {
         const streetAddress = washroom.street.trim();
         const city = washroom.city.trim();
-        const accessibleStatus = washroom.accessible;
-        const unisexStatus = washroom.unisex;
-        const directions = washroom.directions;
-        const comment = washroom.comment;
-        const changeTableStatus = washroom.changing_table;
         
         const $name = $('<h2>').text(washroom.name);
         
@@ -78,15 +73,28 @@ app.displayWashroom = function(washrooms) {
         // const mapURL = `https://www.google.com/maps/search/?api=1&query=${washroomLat},${washroomLong}`;
         const mapURL = `https://www.google.com/maps/search/?api=1&query=${streetAddress}+${city}`;
         const $address = $('<p>').html(`<a href="${mapURL}" target="_blank">${streetAddress}, ${city}</a>`);
-
-        // create features list and populate with features
+        
+        // create features list and populate with features, if they exist
+        const accessibleStatus = washroom.accessible;
+        const unisexStatus = washroom.unisex;
+        const changeTableStatus = washroom.changing_table;
         const $featuresList = $('<ul class="features">');
-        const $unisex = $('<li>').text(`Unisex: ${unisexStatus}`);
-        const $accessible = $('<li>').text(`Wheelchair accessible: ${accessibleStatus}`);
-        const $changeTable = $('<li>').text(`Change table: ${changeTableStatus}`);
-        $featuresList.append($unisex, $accessible, $changeTable);
-
+        if(unisexStatus) {
+            const $unisex = $('<li>').text(`Unisex: ${unisexStatus}`);
+            $featuresList.append($unisex);
+        }
+        if(accessibleStatus) {
+            const $accessible = $('<li>').text(`Wheelchair accessible: ${accessibleStatus}`);
+            $featuresList.append($accessible);
+        }
+        if(changeTableStatus) {
+            const $changeTable = $('<li>').text(`Change table: ${changeTableStatus}`);
+            $featuresList.append($changeTable);
+        }
+        
         // put directions and comments into their own div so they can be shown or hidden
+        const directions = washroom.directions;
+        const comment = washroom.comment;
         const $washroomInfo = $('<div class="more-info">');
         if(directions) {
             $washroomInfo.append(`<p>Directions: ${directions}</p>`);

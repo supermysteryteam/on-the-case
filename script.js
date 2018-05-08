@@ -14,6 +14,8 @@ app.getCoordinates = function (search) {
         const latitude = res.results[0].geometry.location.lat;
         const longitude = res.results[0].geometry.location.lng;
         const location = res.results[0].formatted_address;
+
+        app.getWashroomsByCoords(latitude, longitude);
     }); 
 }
 
@@ -54,6 +56,7 @@ app.getWashroomsBySearchTerm = function (search) {
 }
 
 app.displayWashroom = function(washrooms) {
+    $('#washrooms').empty();
    // console.log(data)
     washrooms.forEach((washroom) => {
        console.log(washroom.name);

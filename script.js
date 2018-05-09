@@ -64,11 +64,6 @@ app.displayWashroom = function(washrooms) {
     washrooms.forEach((washroom) => {
         const streetAddress = washroom.street.trim();
         const city = washroom.city.trim();
-        const accessibleStatus = washroom.accessible;
-        const unisexStatus = washroom.unisex;
-        const directions = washroom.directions;
-        const comment = washroom.comment;
-        const changeTableStatus = washroom.changing_table;
         
         const $name = $('<h2>').text(washroom.name);
         
@@ -78,49 +73,70 @@ app.displayWashroom = function(washrooms) {
         // const mapURL = `https://www.google.com/maps/search/?api=1&query=${washroomLat},${washroomLong}`;
         const mapURL = `https://www.google.com/maps/search/?api=1&query=${streetAddress}+${city}`;
         const $address = $('<p>').html(`<a href="${mapURL}" target="_blank">${streetAddress}, ${city}</a>`);
-
-        // create features list and populate with features
-        const $featuresList = $('<ul>');
-        const $unisex = $('<li>').text(`Unisex: ${unisexStatus}`);
-        const $accessible = $('<li>').text(`Wheelchair accessible: ${accessibleStatus}`);
-        const $changeTable = $('<li>').text(`Change table: ${changeTableStatus}`);
-        $featuresList.append($unisex, $accessible, $changeTable);
-
-        const $washroomContainer = $("<div>").append($name, $address, $featuresList);
+        
+        // create features list and populate with features, if they exist
+        const accessibleStatus = washroom.accessible;
+        const unisexStatus = washroom.unisex;
+        const changeTableStatus = washroom.changing_table;
+        const $featuresList = $('<ul class="features">');
+        if(unisexStatus) {
+            const $unisex = $('<li>').text(`Unisex: ${unisexStatus}`);
+            $featuresList.append($unisex);
+        }
+        if(accessibleStatus) {
+            const $accessible = $('<li>').text(`Wheelchair accessible: ${accessibleStatus}`);
+            $featuresList.append($accessible);
+        }
+        if(changeTableStatus) {
+            const $changeTable = $('<li>').text(`Change table: ${changeTableStatus}`);
+            $featuresList.append($changeTable);
+        }
+        
+        // put directions and comments into their own div so they can be shown or hidden
+        const directions = washroom.directions;
+        const comment = washroom.comment;
+        const $washroomInfo = $('<div class="more-info">');
         if(directions) {
-            $washroomContainer.append(`<p>Directions: ${directions}</p>`);
+            $washroomInfo.append(`<p>Directions: ${directions}</p>`);
         }
         if (comment) {
-            $washroomContainer.append(`<p>Comments: ${comment}</p>`);
+            $washroomInfo.append(`<p>Comments: ${comment}</p>`);
+        }
+        const $washroomContainer = $("<div>").append($name, $address, $featuresList);
+        if($washroomInfo.text().length > 0) {
+            $washroomContainer.append("<button class='toggle-more-info'>More info</button>");
+            $washroomContainer.append($washroomInfo);
         }
 
         // append washroom container
        $('#washrooms').append($washroomContainer);
+       $('.more-info').hide();
     });
+}
+
+// add title for search result and update with search term
+app.updateSearchTitle = function(titleText) {
+    $('#searchTitle').remove();
+    const $searchResultTitle = $('<h2 id="searchTitle" class="search-title">').text(`Showing search results for ${titleText}`);
+    $('#washrooms').before($searchResultTitle);
 }
 
 
 app.events = function() {
-    
+
     $('#searchForm').on('submit', function(e) {
         e.preventDefault();
         const searchTerm = $(this).children('input[type=search]').val();
         app.getCoordinates(searchTerm);
+        app.updateSearchTitle(searchTerm);
+    });
+
+    $('#washrooms').on("click", ".toggle-more-info", function(e) {
+        e.stopPropagation();
+        e.preventDefault();        
+        $(this).next('.more-info').toggle();
     })
 }
-
-    // app.events = function () {
-    //     $('#animal').on('change', function () {
-    //         // console.log('hi')
-    //         const selectedAnimal = $(this).val();
-    //         // console.log(selectedAnimal);
-    //         app.getArt(selectedAnimal);
-    //         app.updateTitle();
-    //     });
-    // }
-
-
-
 
 // 2. create an init method
 app.init = function () {
@@ -129,5 +145,4 @@ app.init = function () {
 // 3. create a document ready to store it all in
 $(function () {
     app.init();
-
 });

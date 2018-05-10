@@ -16,7 +16,7 @@ app.getCoordinates = function (search) {
         const location = res.results[0].formatted_address;
 
         app.getWashroomsByCoords(latitude, longitude);
-        app.initMap(latitude, longitude);
+        app.initMap(latitude, longitude, location);
     }); 
 }
 
@@ -45,23 +45,29 @@ app.getWashroomsByCoords = function (latitude, longitude) {
 
 app.myMap;
 
-app.initMap = function(latitude, longitude) {
+app.initMap = function(latitude, longitude, location) {
     app.myMap = new google.maps.Map(document.getElementById('map'), {
         center: { lat: latitude,lng: longitude },
         zoom: 15
     });
-    app.addMarker(latitude, longitude);
+    app.addMarker(latitude, longitude, location);
 }
 
 
 
-app.addMarker = function(latitude, longitude) {
+app.addMarker = function(latitude, longitude, location) {
     let marker = new google.maps.Marker({
         position: { lat: latitude, lng: longitude },
         map: app.myMap
     });
 
+    let infoWindow = new google.maps.InfoWindow({
+        content: `<p>${location}</p>`
+    });
 
+    marker.addListener('click', function() {
+        infoWindow.open(map, marker);
+    })
 }
 
 
@@ -137,7 +143,7 @@ app.displayWashroom = function(washrooms) {
     _.uniq(washrooms,(washroom) => washroom.street.split(' ').splice(0,2).join(' ').toLowerCase()).forEach((washroom) => {
         const $name = $('<h2>').text(titleCase(washroom.name));
         const streetAddress = washroom.street.trim();
-        app.addMarker(washroom.latitude, washroom.longitude);
+        app.addMarker(washroom.latitude, washroom.longitude, streetAddress);
         
         const city = washroom.city.trim();
 

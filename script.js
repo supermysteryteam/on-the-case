@@ -43,19 +43,28 @@ app.getWashroomsByCoords = function (latitude, longitude) {
         }); 
     };
 
+app.myMap;
 
-    app.initMap = function(latitude, longitude) {
-    let myMap = new google.maps.Map(document.getElementById('map'), {
+app.initMap = function(latitude, longitude) {
+    app.myMap = new google.maps.Map(document.getElementById('map'), {
         center: { lat: latitude,lng: longitude },
         zoom: 15
     });
+    app.addMarker(latitude, longitude);
 }
 
-//     app.addMarker(props) {
-//         let marker = new google.maps.Marker({
-//             position: { lat: latitude, lng: longitude },
-//             map: myMap
-//     });
+
+
+app.addMarker = function(latitude, longitude) {
+    let marker = new google.maps.Marker({
+        position: { lat: latitude, lng: longitude },
+        map: app.myMap
+    });
+
+
+}
+
+
 
 //     if(props.content) {
 //     let infoWindow = new google.maps.InfoWindow({
@@ -126,11 +135,12 @@ app.displayWashroom = function(washrooms) {
 
 
     _.uniq(washrooms,(washroom) => washroom.street.split(' ').splice(0,2).join(' ').toLowerCase()).forEach((washroom) => {
+        const $name = $('<h2>').text(titleCase(washroom.name));
         const streetAddress = washroom.street.trim();
+        app.addMarker(washroom.latitude, washroom.longitude);
         
         const city = washroom.city.trim();
 
-        const $name = $('<h2>').text(titleCase(washroom.name));
         
         // create map link
         const washroomLat = washroom.latitude;

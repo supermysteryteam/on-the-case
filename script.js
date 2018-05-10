@@ -16,6 +16,7 @@ app.getCoordinates = function (search) {
         const location = res.results[0].formatted_address;
 
         app.getWashroomsByCoords(latitude, longitude);
+        app.initMap(latitude, longitude);
     }); 
 }
 
@@ -37,9 +38,61 @@ app.getWashroomsByCoords = function (latitude, longitude) {
     })
          .then( (res) => {
             const washroomArray = res;
+            app.getMap;
             app.displayWashroom(washroomArray);
         }); 
-    }
+    };
+
+
+    app.initMap = function(latitude, longitude) {
+    let myMap = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: latitude,lng: longitude },
+        zoom: 15
+    });
+}
+
+//     app.addMarker(props) {
+//         let marker = new google.maps.Marker({
+//             position: { lat: latitude, lng: longitude },
+//             map: myMap
+//     });
+
+//     if(props.content) {
+//     let infoWindow = new google.maps.InfoWindow({
+//         content: '<p>Your location</p>'
+//     });
+
+//     marker.addListener('click', function() {
+//         console.log('clicked');
+//         infoWindow.open(map, marker);
+//     })
+// }
+//     console.log("hello")
+// }
+
+// marker Function
+
+
+
+
+
+// app.getMap = function(latitude, longitude) {
+//     $.ajax({
+//         url:"http://proxy.hackeryou.com",
+//         dataType: 'json', 
+//         data: {
+//             reqUrl: 'https://maps.googleapis.com/maps/api/js',
+//             params: {
+//                 key: 'AIzaSyBcN4eKsS7abfkHXltNx_d8x9AASWzKuaA',
+//                 location: `${latitude},${longitude}`,
+//                 radius: 500
+//             }
+//         }
+//     }).then((res) => {
+//      const showMap = res;
+//      console.log('got map');
+//     });
+// }
 
     // backup, may not need 
 // app.getWashroomsBySearchTerm = function (search) {
@@ -132,10 +185,6 @@ app.updateSearchTitle = function(titleText) {
     const $searchResultTitle = $('<h2 id="searchTitle" class="search-title">').text(`Showing search results for ${titleText}`);
     $('#washrooms').before($searchResultTitle);
 }
-
-
-
-
 
 
 app.events = function() {

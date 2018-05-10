@@ -7,7 +7,7 @@ app.getCoordinates = function (search) {
         data: {
             key: 'AIzaSyBcN4eKsS7abfkHXltNx_d8x9AASWzKuaA',
             address: search 
-        }
+        },
     })
     .then((res) => {
         console.log(res);
@@ -35,44 +35,56 @@ app.getWashroomsByCoords = function (latitude, longitude) {
             lng: longitude
         }
     })
-         .then( (results) => {
-            const washroomArray = results;
+         .then( (res) => {
+            const washroomArray = res;
             app.displayWashroom(washroomArray);
         }); 
     }
 
     // backup, may not need 
-app.getWashroomsBySearchTerm = function (search) {
-    $.ajax({
-        url: 'https://www.refugerestrooms.org:443/api/v1/restrooms/search.json',
-        dataType: 'json',
-        data: {
-            ada: true,
-            unisex: true,
-            query: search
-        }
-    })
-        .then((results) => {
-            const washroomArray = results;
-            console.log(results);
-            app.displayWashroom(washroomArray);
-        });
+// app.getWashroomsBySearchTerm = function (search) {
+//     $.ajax({
+//         url: 'https://www.refugerestrooms.org:443/api/v1/restrooms/search.json',
+//         dataType: 'json',
+//         data: {
+//             ada: true,
+//             unisex: true,
+//             query: search
+//         }
+//     })
+//         .then((results) => {
+//             const washroomArray = results;
+//             console.log(results);
+//             app.displayWashroom(washroomArray);
+//         });
+// }
+
+
+   
+function titleCase(str) {
+    return str.toLowerCase().split(' ').map(function (word) {
+        return (word.charAt(0).toUpperCase() + word.slice(1));
+    }).join(' ');
 }
 
 app.displayWashroom = function(washrooms) {
     $('#washrooms').empty();
-    washrooms.forEach((washroom) => {
+    console.log(washrooms)
+
+
+    _.uniq(washrooms,(washroom) => washroom.street.split(' ').splice(0,2).join(' ').toLowerCase()).forEach((washroom) => {
         const streetAddress = washroom.street.trim();
-        const city = washroom.city.trim();
         
-        const $name = $('<h2>').text(washroom.name);
+        const city = washroom.city.trim();
+
+        const $name = $('<h2>').text(titleCase(washroom.name));
         
         // create map link
         const washroomLat = washroom.latitude;
         const washroomLong = washroom.longitude;
         // const mapURL = `https://www.google.com/maps/search/?api=1&query=${washroomLat},${washroomLong}`;
         const mapURL = `https://www.google.com/maps/search/?api=1&query=${streetAddress}+${city}`;
-        const $address = $('<p>').html(`<a href="${mapURL}" target="_blank">${streetAddress}, ${city}</a>`);
+        const $address = $('<p>').html(`<a href="${mapURL}" target="_blank">${titleCase(streetAddress)}, ${city}</a>`);
         
         // create features list and populate with features, if they exist
         const accessibleStatus = washroom.accessible;
@@ -120,6 +132,10 @@ app.updateSearchTitle = function(titleText) {
     const $searchResultTitle = $('<h2 id="searchTitle" class="search-title">').text(`Showing search results for ${titleText}`);
     $('#washrooms').before($searchResultTitle);
 }
+
+
+
+
 
 
 app.events = function() {

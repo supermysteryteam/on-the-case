@@ -55,78 +55,25 @@ app.initMap = function(latitude, longitude, location) {
 
 
 
-app.addMarker = function(latitude, longitude, location) {
+app.addMarker = function(latitude, longitude, location, address) {
     let marker = new google.maps.Marker({
         position: { lat: latitude, lng: longitude },
         map: app.myMap
     });
 
+    let infoWindowContent = `<p>${location}</p>`
+    if (address) {
+        infoWindowContent += `<p>${address}</p>`
+    }
+
     let infoWindow = new google.maps.InfoWindow({
-        content: `<p>${location}</p>`
+        content: infoWindowContent
     });
 
     marker.addListener('click', function() {
         infoWindow.open(map, marker);
     })
 }
-
-
-
-//     if(props.content) {
-//     let infoWindow = new google.maps.InfoWindow({
-//         content: '<p>Your location</p>'
-//     });
-
-//     marker.addListener('click', function() {
-//         console.log('clicked');
-//         infoWindow.open(map, marker);
-//     })
-// }
-//     console.log("hello")
-// }
-
-// marker Function
-
-
-
-
-
-// app.getMap = function(latitude, longitude) {
-//     $.ajax({
-//         url:"http://proxy.hackeryou.com",
-//         dataType: 'json', 
-//         data: {
-//             reqUrl: 'https://maps.googleapis.com/maps/api/js',
-//             params: {
-//                 key: 'AIzaSyBcN4eKsS7abfkHXltNx_d8x9AASWzKuaA',
-//                 location: `${latitude},${longitude}`,
-//                 radius: 500
-//             }
-//         }
-//     }).then((res) => {
-//      const showMap = res;
-//      console.log('got map');
-//     });
-// }
-
-    // backup, may not need 
-// app.getWashroomsBySearchTerm = function (search) {
-//     $.ajax({
-//         url: 'https://www.refugerestrooms.org:443/api/v1/restrooms/search.json',
-//         dataType: 'json',
-//         data: {
-//             ada: true,
-//             unisex: true,
-//             query: search
-//         }
-//     })
-//         .then((results) => {
-//             const washroomArray = results;
-//             console.log(results);
-//             app.displayWashroom(washroomArray);
-//         });
-// }
-
 
    
 function titleCase(str) {
@@ -143,7 +90,7 @@ app.displayWashroom = function(washrooms) {
     _.uniq(washrooms,(washroom) => washroom.street.split(' ').splice(0,2).join(' ').toLowerCase()).forEach((washroom) => {
         const $name = $('<h2>').text(titleCase(washroom.name));
         const streetAddress = washroom.street.trim();
-        app.addMarker(washroom.latitude, washroom.longitude, streetAddress);
+        app.addMarker(washroom.latitude, washroom.longitude, washroom.name, streetAddress);
         
         const city = washroom.city.trim();
 

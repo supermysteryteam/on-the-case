@@ -50,16 +50,37 @@ app.initMap = function(latitude, longitude, location) {
         center: { lat: latitude,lng: longitude },
         zoom: 15
     });
-    app.addMarker(latitude, longitude, location);
+    app.addInitialMarker(latitude, longitude, location);
 }
 
 
+app.addInitialMarker = function(latitude, longitude, location) {
+    let marker = new google.maps.Marker({
+        position: { lat: latitude, lng: longitude },
+        map: app.myMap,
+        icon: {
+            path: google.maps.SymbolPath.CIRCLE,
+            fillColor: 'white',
+            fillOpacity: 0.6,
+            strokeColor: 'purple',
+            strokeWeight: 14
+        }
+});
+};
 
 app.addMarker = function(latitude, longitude, location, address) {
     let marker = new google.maps.Marker({
         position: { lat: latitude, lng: longitude },
-        map: app.myMap
+        map: app.myMap,
+        icon: {
+            path: google.maps.SymbolPath.CIRCLE,
+            fillColor: 'white',
+            fillOpacity: 0.6,
+            strokeColor: 'green',
+            strokeWeight: 14
+        }
     });
+    
 
     let infoWindowContent = `<p>${location}</p>`
     if (address) {

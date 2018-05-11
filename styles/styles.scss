@@ -7,7 +7,11 @@ body {
 }
 
 #map {
-        height: 500px;
-        width: 400px;
-        background-color: grey;
-      }
+    height: 500px;
+    width: 400px;
+    background-color: grey;
+}
+
+.icon {
+    max-height: 2em;
+}

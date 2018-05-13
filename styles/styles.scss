@@ -2,8 +2,8 @@
 @import 'utils';
 
 $body-font: 'Montserrat', sans-serif;
-$main-gradient: linear-gradient(to right, #FDB99B, #CF8BF3, #A770EF);
 $header-font: 'Roboto Slab', serif;
+$main-gradient: linear-gradient(to right, #FDB99B, #CF8BF3, #A770EF);
 
 $black: #474747;
 
@@ -52,16 +52,18 @@ body {
     width: 100%;
 }
 
-.icon {
-    max-height: 2em;
-    padding-right: .75rem;
+.app {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    height: 100vh;
 }
 
 .wrapper {
     display: grid;
     grid-template-columns: 1fr 475px;
     grid-template-rows: 1fr;
-    height: 100vh;
+    // height: 100vh;
     margin: 0 auto;
     overflow: hidden;
 }
@@ -71,13 +73,17 @@ body {
     list-style: none;
     margin: 0;
     padding: 0;    
-
+    
     li {
         margin-right: 8px;
-        //width: 2em;
-
+        
         img {
             display: block;
+        }
+
+        .icon {
+            max-height: 2em;
+            padding-right: .75rem;
         }
     }
 
@@ -105,11 +111,15 @@ body {
 
 .washroomContainer {
     grid-column: -1;
+<<<<<<< HEAD
     overflow-y: scroll;
     position: absolute;
     top: 2%;
     bottom:0;
     left: 0;
+=======
+    overflow-y: auto;
+>>>>>>> 89d92573097244360bcefa110e55e3c3885ec308
     
     h2 {
         font-size: 1.6rem;
@@ -193,10 +203,16 @@ form {
 }
 
 footer {
+    grid-column: 1 / -1;
+
     p {
         font-family: $body-font;
         text-align:center;
         padding:0;
         margin: 5px;
     }
+}
+
+header {
+    grid-column: 1 / -1;
 }

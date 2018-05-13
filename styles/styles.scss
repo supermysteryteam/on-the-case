@@ -1,12 +1,37 @@
 @import 'setup';
 @import 'utils';
 
+$header-font: 'Roboto Slab', serif;
 $body-font: 'Roboto', sans-serif;
+
+$black: #474747;
 
 html {
     font-size: 62.5;
 }
 
+header{
+    .logo {
+        width:45px;
+        margin:8px 0px -1px 10px
+    }
+    h1 {
+        text-align:left;
+        font-family: $header-font;
+        color: darken($black, 5%);
+        font-size: 3rem;
+        margin: 0 2px;
+        padding: 0;
+        font-weight:700;
+        display: inline-block;
+    }
+
+    h2 {
+        padding: 0;
+        margin: 0 0 0 10px;
+        color: darken($black, 5%);
+    }
+}
 body {
     background: #A770EF;
     /* fallback for old browsers */
@@ -91,5 +116,14 @@ body {
 form {
     input {
         width: 100%;
+    }
+}
+
+footer {
+    p {
+        font-family: $body-font;
+        text-align:center;
+        padding:0;
+        margin: 5px;
     }
 }

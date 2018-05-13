@@ -24,10 +24,8 @@ app.reverseGeocode = function(position) {
             },
         })
         .then((res) => {
-            $('#search').val(res.results[0].formatted_address);
+            const address = res.results[0].formatted_address;
+            $('#search').val(address);
+            app.updateSearchTitle(address)
         });
 }
-
-$(function() {
-    app.getLocation();
-})

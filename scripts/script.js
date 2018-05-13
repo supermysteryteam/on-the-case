@@ -116,7 +116,7 @@ app.displayWashroom = function(washrooms) {
         const $name = $('<h2>').text(titleCase(washroom.name));
         const streetAddress = washroom.street.trim();
         app.addMarker(washroom.latitude, washroom.longitude, washroom.name, streetAddress);
-        
+    
         const city = washroom.city.trim();
 
         // create map link
@@ -159,7 +159,7 @@ app.displayWashroom = function(washrooms) {
         }
         const $washroomContainer = $("<div>").append($washroomInnerContent, $featuresList);
         if($washroomInfo.text().length > 0) {
-            $washroomContainer.append(`<button class='toggle-more-info'><i class="fas fa-info-circle" title="More info"></i></button>`);
+            $washroomContainer.append(`<button class='toggle-more-info'>More info</button>`);
             $washroomContainer.append($washroomInfo);
         }
 
@@ -176,12 +176,11 @@ app.updateSearchTitle = function(titleText) {
     $('#washrooms').before($searchResultTitle);
 }
 
-
 app.events = function() {
 
     $('#searchForm').on('submit', function(e) {
         e.preventDefault();
-        const searchTerm = $(this).children('input[type=search]').val();
+        const searchTerm = $(this).find('input[type=search]').val();
         app.getCoordinates(searchTerm);
         app.updateSearchTitle(searchTerm);
     });
@@ -190,13 +189,20 @@ app.events = function() {
         e.stopPropagation();
         e.preventDefault();        
         $(this).next('.more-info').toggle();
+    });
+
+    $('.clear-input').on('click', function (e) {
+        e.preventDefault();
+        const sibling = $(this).siblings('input').val('');
     })
+
     
 }
 
 // 2. create an init method
 app.init = function () {
     app.events();
+    app.getLocation();
 }
 // 3. create a document ready to store it all in
 $(function () {

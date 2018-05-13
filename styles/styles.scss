@@ -34,7 +34,7 @@ body {
 
 .wrapper {
     display: grid;
-    grid-template-columns: 1fr 500px;
+    grid-template-columns: 1fr 475px;
     grid-template-rows: 1fr;
     height: 100vh;
     margin: 0 auto;
@@ -76,24 +76,55 @@ body {
 
 .washroomContainer {
     grid-column: -1;
-    overflow-y: auto;
+    // overflow-y: auto;
     h2,
     p {
         font-size: 1.6rem;
-        margin: 0 0 0.5rem 0;
     }
     h2 {
-        border-top: 1px solid transparent;
-        border-image: $main-gradient;
-        border-image-slice: 1;
-        margin-top: 1.5rem;
-        padding-top: 2rem;
+        margin: 0 0 0.5rem 0;
     }
     p {
+        margin: 0 0.5rem 0 0;
     }
     a {
         text-decoration: none;
         color: inherit;
+    }
+    
+    & > div {
+        align-items: center;
+        border-top: 1px solid transparent;
+        border-image: $main-gradient;
+        border-image-slice: 1;
+        display: grid;
+        grid-gap: 20px;
+        grid-template-columns: 1fr auto;
+        grid-template-rows: auto auto;
+        margin-top: 1.5rem;
+        padding-top: 2rem;
+
+
+        .washroom-inner-content {
+            grid-column: 1 / 2;
+            grid-row: 1;
+        }
+
+        .features {
+            grid-column: 2 / 3;
+            grid-row: 1;
+        }
+
+        .toggle-more-info,
+        .more-info {
+            display: block;
+            grid-column: 1 / -1;
+            grid-row: 2;
+        }
+
+        .more-info {
+            grid-row: 3;
+        }
     }
 }
 

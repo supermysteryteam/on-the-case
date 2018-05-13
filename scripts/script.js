@@ -105,8 +105,7 @@ function titleCase(str) {
 
 app.displayWashroom = function(washrooms) {
     $('#washrooms').empty();
-    console.log(washrooms)
-
+    console.log(washrooms);
 
     _.uniq(washrooms,(washroom) => washroom.street.split(' ').splice(0,2).join(' ').toLowerCase()).forEach((washroom) => {
         const $name = $('<h2>').text(titleCase(washroom.name));
@@ -122,6 +121,9 @@ app.displayWashroom = function(washrooms) {
         // const mapURL = `https://www.google.com/maps/search/?api=1&query=${washroomLat},${washroomLong}`;
         const mapURL = `https://www.google.com/maps/search/?api=1&query=${streetAddress}+${city}`;
         const $address = $('<p>').html(`<a href="${mapURL}" target="_blank">${titleCase(streetAddress)}, ${city}</a>`);
+
+        const $washroomInnerContent = $('<div class="washroom-inner-content">');
+        $washroomInnerContent.append($name, $address);
         
         // create features list and populate with features, if they exist
         const accessibleStatus = washroom.accessible;
@@ -151,7 +153,7 @@ app.displayWashroom = function(washrooms) {
         if (comment) {
             $washroomInfo.append(`<p>Comments: ${comment}</p>`);
         }
-        const $washroomContainer = $("<div>").append($name, $address, $featuresList);
+        const $washroomContainer = $("<div>").append($washroomInnerContent, $featuresList);
         if($washroomInfo.text().length > 0) {
             $washroomContainer.append(`<button class='toggle-more-info'><i class="fas fa-info-circle" title="More info"></i></button>`);
             $washroomContainer.append($washroomInfo);

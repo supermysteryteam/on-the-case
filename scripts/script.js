@@ -49,7 +49,7 @@ app.myMap;
 app.initMap = function(latitude, longitude, location) {
     app.myMap = new google.maps.Map(document.getElementById('map'), {
         center: { lat: latitude,lng: longitude },
-        zoom: 15,
+        zoom: 16,
         zoomControl: true,
         zoomControlOptions: {
             position: google.maps.ControlPosition.TOP_LEFT,
@@ -110,8 +110,7 @@ function titleCase(str) {
 
 app.displayWashroom = function(washrooms) {
     $('#washrooms').empty();
-    console.log(washrooms)
-
+    console.log(washrooms);
 
     _.uniq(washrooms,(washroom) => washroom.street.split(' ').splice(0,2).join(' ').toLowerCase()).forEach((washroom) => {
         const $name = $('<h2>').text(titleCase(washroom.name));
@@ -126,6 +125,9 @@ app.displayWashroom = function(washrooms) {
         // const mapURL = `https://www.google.com/maps/search/?api=1&query=${washroomLat},${washroomLong}`;
         const mapURL = `https://www.google.com/maps/search/?api=1&query=${streetAddress}+${city}`;
         const $address = $('<p>').html(`<a href="${mapURL}" target="_blank">${titleCase(streetAddress)}, ${city}</a>`);
+
+        const $washroomInnerContent = $('<div class="washroom-inner-content">');
+        $washroomInnerContent.append($name, $address);
         
         // create features list and populate with features, if they exist
         const accessibleStatus = washroom.accessible;
@@ -133,15 +135,15 @@ app.displayWashroom = function(washrooms) {
         const changeTableStatus = washroom.changing_table;
         const $featuresList = $('<ul class="features">');
         if(unisexStatus) {
-            const $unisex = $('<li>').html(`<img class="icon" src="images/unisex.svg" alt="Unisex" />`);
+            const $unisex = $('<li>').html(`<img class="icon" src="images/unisex.png" alt="Unisex/Gender neutral" />`);
             $featuresList.append($unisex);
         }
         if(accessibleStatus) {
-            const $accessible = $('<li>').html(`<img class="icon" src="images/accessible.svg" alt="Wheelchair accessible" />`);
+            const $accessible = $('<li>').html(`<img class="icon" src="images/wheelchair.png" alt="Wheelchair accessible" />`);
             $featuresList.append($accessible);
         }
         if(changeTableStatus) {
-            const $changeTable = $('<li>').html(`<img class="icon" src="images/change-table.svg" alt="Changing table" />`);
+            const $changeTable = $('<li>').html(`<img class="icon" src="images/baby.png" alt="Changing table" />`);
             $featuresList.append($changeTable);
         }
         
@@ -155,7 +157,7 @@ app.displayWashroom = function(washrooms) {
         if (comment) {
             $washroomInfo.append(`<p>Comments: ${comment}</p>`);
         }
-        const $washroomContainer = $("<div>").append($name, $address, $featuresList);
+        const $washroomContainer = $("<div>").append($washroomInnerContent, $featuresList);
         if($washroomInfo.text().length > 0) {
             $washroomContainer.append(`<button class='toggle-more-info'><i class="fas fa-info-circle" title="More info"></i></button>`);
             $washroomContainer.append($washroomInfo);

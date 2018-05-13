@@ -25,7 +25,6 @@ app.getWashroomsByCoords = function (latitude, longitude) {
     const accessibleVal = $('#accessible').prop('checked');
     console.log(`Unisex: ${unisexVal}; Accessible: ${accessibleVal}`);
 
-
     $.ajax({
         url: 'https://www.refugerestrooms.org:443/api/v1/restrooms/by_location.json',
         dataType: 'json',
@@ -45,47 +44,43 @@ app.getWashroomsByCoords = function (latitude, longitude) {
 
 app.myMap;
 
-
 app.initMap = function(latitude, longitude, location) {
     app.myMap = new google.maps.Map(document.getElementById('map'), {
         center: { lat: latitude,lng: longitude },
-        zoom: 15,
-        zoomControl: true,
-        zoomControlOptions: {
-            position: google.maps.ControlPosition.TOP_LEFT,
-            style: google.maps.ZoomControlStyle.SMALL
-        },
-        mapTypeControl:false,
-        streetViewControl:true 
+        zoom: 15
     });
     app.addInitialMarker(latitude, longitude, location);
 }
 
-var purpleIcon = 'images/marker-purple.png';
-var greenIcon = 'images/marker-green.png';
 
 app.addInitialMarker = function(latitude, longitude, location) {
     let marker = new google.maps.Marker({
         position: { lat: latitude, lng: longitude },
         map: app.myMap,
         icon: {
-            url: purpleIcon,
-            scaledSize: new google.maps.Size(20,20)
+            path: google.maps.SymbolPath.CIRCLE,
+            fillColor: 'white',
+            fillOpacity: 0.6,
+            strokeColor: 'purple',
+            strokeWeight: 14
         }
 });
 };
 
 app.addMarker = function(latitude, longitude, location, address) {
-
     let marker = new google.maps.Marker({
         position: { lat: latitude, lng: longitude },
         map: app.myMap,
         icon: {
-            url: greenIcon,
-            scaledSize: new google.maps.Size(20,20)
+            path: google.maps.SymbolPath.CIRCLE,
+            fillColor: 'white',
+            fillOpacity: 0.6,
+            strokeColor: 'green',
+            strokeWeight: 14
         }
     });
     
+
     let infoWindowContent = `<p>${location}</p>`
     if (address) {
         infoWindowContent += `<p>${address}</p>`
@@ -96,9 +91,8 @@ app.addMarker = function(latitude, longitude, location, address) {
     });
 
     marker.addListener('click', function() {
-        infoWindow.open(map, marker);    
+        infoWindow.open(map, marker);
     })
-
 }
 
    
@@ -120,6 +114,7 @@ app.displayWashroom = function(washrooms) {
         
         const city = washroom.city.trim();
 
+        
         // create map link
         const washroomLat = washroom.latitude;
         const washroomLong = washroom.longitude;
@@ -133,15 +128,15 @@ app.displayWashroom = function(washrooms) {
         const changeTableStatus = washroom.changing_table;
         const $featuresList = $('<ul class="features">');
         if(unisexStatus) {
-            const $unisex = $('<li>').html(`<img class="icon" src="images/unisex.svg" alt="Unisex" />`);
+            const $unisex = $('<li>').text(`Unisex: ${unisexStatus}`);
             $featuresList.append($unisex);
         }
         if(accessibleStatus) {
-            const $accessible = $('<li>').html(`<img class="icon" src="images/accessible.svg" alt="Wheelchair accessible" />`);
+            const $accessible = $('<li>').text(`Wheelchair accessible: ${accessibleStatus}`);
             $featuresList.append($accessible);
         }
         if(changeTableStatus) {
-            const $changeTable = $('<li>').html(`<img class="icon" src="images/change-table.svg" alt="Changing table" />`);
+            const $changeTable = $('<li>').text(`Change table: ${changeTableStatus}`);
             $featuresList.append($changeTable);
         }
         

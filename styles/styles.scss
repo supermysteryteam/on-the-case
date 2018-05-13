@@ -99,9 +99,17 @@ body {
     z-index: 10;
 }
 
+.washroomContainer-container {
+    position:relative;
+}
+
 .washroomContainer {
     grid-column: -1;
-    // overflow-y: auto;
+    overflow-y: scroll;
+    position: absolute;
+    top: 2%;
+    bottom:0;
+    left: 0;
     
     h2 {
         font-size: 1.6rem;

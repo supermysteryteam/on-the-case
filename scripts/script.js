@@ -153,7 +153,7 @@ app.displayWashroom = function(washrooms) {
         }
         const $washroomContainer = $("<div>").append($name, $address, $featuresList);
         if($washroomInfo.text().length > 0) {
-            $washroomContainer.append("<button class='toggle-more-info'>More info</button>");
+            $washroomContainer.append(`<button class='toggle-more-info'><i class="fas fa-info-circle" title="More info"></i></button>`);
             $washroomContainer.append($washroomInfo);
         }
 
@@ -185,6 +185,7 @@ app.events = function() {
         e.preventDefault();        
         $(this).next('.more-info').toggle();
     })
+    
 }
 
 // 2. create an init method

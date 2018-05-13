@@ -11,37 +11,39 @@
 
 </head>
 <body>
+   <div class="app">
+       <header>
+           <img src="images/location_searching.svg" class= "logo" alt="location search icon">
+           <h1>Bonbanho</h1>
+           <h2>find accessible & unisex washrooms</h2>
+       </header>
+       <main>
+           <div class="wrapper">
+               <div class="sidebar">
+                   <form action="" id="searchForm">
+                       <label for="search" class="visually-hidden">Search</label>
+                       <input type="search" placeholder="Search" id="search" name="search" required>
+                       <input type="checkbox" id="unisex" class="visually-hidden" checked><label for="unisex">Unisex</label>
+                       <input type="checkbox" id="accessible" class="visually-hidden" checked>
+                       <label for="ada-accessible">Accessible</label>
+                       <input type="submit" value="Find a washroom" id="submit" name="submit">
+                   </form>
+                   <div class="washroomContainer" id="washrooms">
+                       
+                   </div>
+               </div>
+       
+               <div class="mapContainer" id="map"></div>    
+           </div>
    
-    <header>
-        <img src="images/location_searching.svg" class= "logo" alt="location search icon">
-        <h1>Bonbanho</h1>
-        <h2>find accessible & unisex washrooms</h2>
-    </header>
-    <main>
-        <div class="wrapper">
-            <div class="sidebar">
-                <form action="" id="searchForm">
-                    <label for="search" class="visually-hidden">Search</label>
-                    <input type="search" placeholder="Search" id="search" name="search" required>
-                    <input type="checkbox" id="unisex" class="visually-hidden" checked><label for="unisex">Unisex</label>
-                    <input type="checkbox" id="accessible" class="visually-hidden" checked>
-                    <label for="ada-accessible">Accessible</label>
-                    <input type="submit" value="Find a washroom" id="submit" name="submit">
-                </form>
-                <div class="washroomContainer" id="washrooms"></div>
-            </div>
-    
-            <div class="mapContainer" id="map"></div>    
-        </div>
-
-    </main>
-
-    <footer>
-<p>Created by
-<a href="https://github.com/jlealess" target="_blank">Jackie Lealess</a>
-<a href="https://github.com/jlealess" target="_blank">and
-    <a href="https://github.com/lizfaria" target="_blank">Liz Faria</a></p>
-    </footer>
+       </main>
+   
+       <footer>
+           <p>Created by
+               <a href="https://github.com/jlealess" target="_blank">Jackie Lealess</a> and
+               <a href="https://github.com/lizfaria" target="_blank">Liz Faria</a></p>
+       </footer>
+   </div>
  
     <script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>

@@ -129,15 +129,15 @@ app.displayWashroom = function(washrooms) {
         const changeTableStatus = washroom.changing_table;
         const $featuresList = $('<ul class="features">');
         if(unisexStatus) {
-            const $unisex = $('<li>').html(`<img class="icon" src="images/unisex.svg" alt="Unisex" />`);
+            const $unisex = $('<li>').html(`<img class="icon" src="images/unisex.png" alt="Unisex/Gender neutral" />`);
             $featuresList.append($unisex);
         }
         if(accessibleStatus) {
-            const $accessible = $('<li>').html(`<img class="icon" src="images/accessible.svg" alt="Wheelchair accessible" />`);
+            const $accessible = $('<li>').html(`<img class="icon" src="images/wheelchair.png" alt="Wheelchair accessible" />`);
             $featuresList.append($accessible);
         }
         if(changeTableStatus) {
-            const $changeTable = $('<li>').html(`<img class="icon" src="images/change-table.svg" alt="Changing table" />`);
+            const $changeTable = $('<li>').html(`<img class="icon" src="images/baby.png" alt="Changing table" />`);
             $featuresList.append($changeTable);
         }
         

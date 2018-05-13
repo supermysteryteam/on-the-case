@@ -1,10 +1,11 @@
 @import 'setup';
 @import 'utils';
 
-$body-font: 'Roboto', sans-serif;
+$body-font: 'Montserrat', sans-serif;
+$main-gradient: linear-gradient(to right, #FDB99B, #CF8BF3, #A770EF);
 
 html {
-    font-size: 62.5;
+    font-size: 62.5%;
 }
 
 body {
@@ -17,6 +18,7 @@ body {
     background: linear-gradient(to right, #FDB99B, #CF8BF3, #A770EF);
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     font-family: $body-font;
+    font-size: 1.6rem;
 
 }
 
@@ -26,49 +28,17 @@ body {
 }
 
 .icon {
-    max-height: 3em;
+    max-height: 2em;
+    padding-right: .75rem;
 }
 
 .wrapper {
     display: grid;
-    grid-template-columns: 5fr 2fr;
+    grid-template-columns: 1fr 500px;
     grid-template-rows: 1fr;
     height: 100vh;
     margin: 0 auto;
     overflow: hidden;
-
-    .mapContainer {
-        grid-column: 1;
-        grid-row: 1;
-    }
-
-    .sidebar {
-        background-color: rgba(255, 255, 255, 0.8);
-        display: grid;
-        grid-column: 2;
-        grid-row: 1;
-        grid-template-rows: auto 1fr;
-        padding: 25px;
-    }
-
-    .washroomContainer {
-        grid-column: -1;
-        overflow-y: auto;
-
-        h2, p {
-            font-size: 1rem;
-        }
-
-        h2 {
-            border-top: 1px dotted lightgray;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-    }
-
 }
 
 .features {
@@ -88,8 +58,73 @@ body {
 
 }
 
+.mapContainer {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.sidebar {
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: -1px 0 3px rgba(0,0,0,0.2);
+    display: grid;
+    grid-column: 2;
+    grid-row: 1;
+    grid-template-rows: auto 1fr;
+    padding: 25px;
+    z-index: 10;
+}
+
+.washroomContainer {
+    grid-column: -1;
+    overflow-y: auto;
+    h2,
+    p {
+        font-size: 1.6rem;
+        margin: 0 0 0.5rem 0;
+    }
+    h2 {
+        border-top: 1px solid transparent;
+        border-image: $main-gradient;
+        border-image-slice: 1;
+        margin-top: 1.5rem;
+        padding-top: 2rem;
+    }
+    p {
+    }
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+}
+
+
 form {
     input {
         width: 100%;
+
+        &[type=search],
+        &[type=submit] {
+            box-sizing: border-box;
+            padding: 1rem;
+        }
+
+        &[type=submit] {
+            background: $main-gradient;
+            border: 2px solid #A770EF;
+            border-radius: 2px;
+            color: white;
+            font-weight: 700;
+            transition: all 0.5s ease-in-out;
+
+            &:hover,
+            &:focus {
+                background: white;
+                color: #A770EF;
+            }
+        }
+
+        &[type=checkbox] {
+
+        }
     }
 }

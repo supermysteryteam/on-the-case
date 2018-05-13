@@ -85,6 +85,7 @@ form {
                 border: 2px solid $black;
                 border-radius: 2px;
                 display: inline-block;
+                font-weight: bold;
                 margin: 20px 10px 20px 0;
                 padding: 10px 20px 10px 45px;
     
@@ -100,7 +101,6 @@ form {
             &:checked+label {
                 border: 2px solid #A770EF;
                 color: #A770EF;
-                font-weight: bold;
             }
 
         }

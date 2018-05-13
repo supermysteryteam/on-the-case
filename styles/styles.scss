@@ -1,6 +1,8 @@
-
 @import 'setup';
 @import 'utils';
+
+$body-font: 'Roboto', sans-serif;
+
 html {
     font-size: 62.5;
 }
@@ -14,7 +16,7 @@ body {
 
     background: linear-gradient(to right, #FDB99B, #CF8BF3, #A770EF);
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    font-family: 'Roboto', sans-serif;
+    font-family: $body-font;
 
 }
 

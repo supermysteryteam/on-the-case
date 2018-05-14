@@ -176,6 +176,8 @@ app.updateSearchTitle = function(titleText) {
     $('#submit').after($searchResultTitle);
 }
 
+app.accordianDisplay = true; 
+
 app.events = function() {
 
     $('#searchForm').on('submit', function(e) {
@@ -195,6 +197,8 @@ app.events = function() {
         e.preventDefault();
         const sibling = $(this).siblings('input').val('');
     });
+
+
     
     $('.sidebar').on('click', '.accordian-control', function(e) {
         e.stopPropagation();
@@ -202,10 +206,12 @@ app.events = function() {
         $(this)
         .next('.accordian-panel')
         .slideToggle();
-        if ($(this).text("Show List Results")) {
+        if (app.accordianDisplay) {
             $(this).text("Hide List Results");
-        } else if ($(this).text("Hide List Results")) {
+            app.accordianDisplay = false;
+        } else {
             $(this).text("Show List Results");
+            app.accordianDisplay = true;
         }
 
     });

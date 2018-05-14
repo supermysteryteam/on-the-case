@@ -173,7 +173,7 @@ app.displayWashroom = function(washrooms) {
 app.updateSearchTitle = function(titleText) {
     $('#searchTitle').remove();
     const $searchResultTitle = $('<h2 id="searchTitle" class="search-title">').text(`Showing search results for ${titleText}`);
-    $('#washrooms').before($searchResultTitle);
+    $('#submit').after($searchResultTitle);
 }
 
 app.events = function() {
@@ -194,9 +194,14 @@ app.events = function() {
     $('.clear-input').on('click', function (e) {
         e.preventDefault();
         const sibling = $(this).siblings('input').val('');
-    })
+    });
 
-    
+    $('.sidebar').on('click', '.accordian-control', function(e) {
+        e.preventDefault();
+        $(this)
+        .next('.accordian-panel')
+        .slideToggle();
+    });
 }
 
 // 2. create an init method

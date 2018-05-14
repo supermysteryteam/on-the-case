@@ -25,6 +25,13 @@ body {
 
 }
 
+.accordian-control {
+    border:none;
+    background-color:transparent;
+    color: #A770EF;
+    font-weight:700;
+    }
+
 form {
     margin-bottom: 15px;
 
@@ -40,6 +47,9 @@ form {
         grid-template-columns: 1fr auto;
         width: 100%;
     }
+
+    
+
     input {
         &[type=search],
         &[type=submit] {
@@ -258,9 +268,9 @@ header {
     z-index: 10;
 }
 
-
 .washroomContainer-container {
     position:relative;
+    display:none;
 }
 
 .washroomContainer {
@@ -295,9 +305,9 @@ header {
     
     & > div {
         align-items: center;
-        border-top: 1px solid transparent;
-        border-image: $main-gradient;
-        border-image-slice: 1;
+        border-top: 1px solid #CF8BF3;
+        // border-image: $main-gradient;
+        // border-image-slice: 1;
         display: grid;
         grid-gap: 20px;
         grid-template-columns: 1fr auto;

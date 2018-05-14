@@ -196,13 +196,19 @@ app.events = function() {
         const sibling = $(this).siblings('input').val('');
     });
     
-    // $('.washroomContainer-container').on('click', '.accordian-control', function(e) {
-    //     e.stopPropagation();
-    //     e.preventDefault();
-    //     $(this)
-    //     .next('.washroomContainer')
-    //     .slideToggle();
-    // });
+    $('.sidebar').on('click', '.accordian-control', function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        $(this)
+        .next('.accordian-panel')
+        .slideToggle();
+        if ($(this).text("Show List Results")) {
+            $(this).text("Hide List Results");
+        } else if ($(this).text("Hide List Results")) {
+            $(this).text("Show List Results");
+        }
+
+    });
 }
 
 // 2. create an init method

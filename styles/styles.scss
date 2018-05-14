@@ -230,7 +230,7 @@ header {
     grid-column: 1;
     grid-row: 1;
     @media(max-width: 768px) {
-        position:absolute;
+        position:relative;
     }    
 }
 

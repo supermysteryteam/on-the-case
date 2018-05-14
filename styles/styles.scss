@@ -25,12 +25,7 @@ body {
 
 }
 
-.accordian-control {
-    border:none;
-    background-color:transparent;
-    color: #A770EF;
-    font-weight:700;
-    }
+
 
 form {
     margin-bottom: 15px;
@@ -268,9 +263,25 @@ header {
     z-index: 10;
 }
 
+.accordian-control {
+    display: none; 
+
+    @media(max-width:768px) {
+        display:block;
+    }
+    
+    border:none;
+    background-color:transparent;
+    color: #A770EF;
+    font-weight:700;
+    }
+
 .washroomContainer-container {
     position:relative;
-    display:none;
+    
+    @media(max-width:768px) {
+        display:none;
+    }
 }
 
 .washroomContainer {

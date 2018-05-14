@@ -195,13 +195,14 @@ app.events = function() {
         e.preventDefault();
         const sibling = $(this).siblings('input').val('');
     });
-
-    $('.sidebar').on('click', '.accordian-control', function(e) {
-        e.preventDefault();
-        $(this)
-        .next('.accordian-panel')
-        .slideToggle();
-    });
+    
+    // $('.washroomContainer-container').on('click', '.accordian-control', function(e) {
+    //     e.stopPropagation();
+    //     e.preventDefault();
+    //     $(this)
+    //     .next('.washroomContainer')
+    //     .slideToggle();
+    // });
 }
 
 // 2. create an init method

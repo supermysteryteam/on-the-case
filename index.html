@@ -8,89 +8,55 @@
     <script defer src='https://use.fontawesome.com/releases/v5.0.10/js/all.js' integrity='sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+' crossorigin='anonymous'></script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto+Slab:400,700" rel="stylesheet">
     <link rel="stylesheet" href="styles/styles.css">
-
 </head>
 <body>
-   <div class="app">
-       <header>
-           <div class="logo-container">
-               <img src="images/location_searching.svg" class="logo" alt="location search icon">
-               <h1>Bonbanho</h1>
-           </div>
-           <p>find accessible & unisex washrooms</p>
-       </header>
-       <main>
-           <div class="wrapper">
-               <div class="sidebar">
-                   <form action="" id="searchForm">
-                       <label for="search" class="visually-hidden">Search</label>
-                       <div class="input-block">
-                           <input type="search" placeholder="Search" id="search" name="search" required>
-                            <button class="clear-input">
-                                <i class="fas fa-times" title="Clear input"></i>
-                            </button>
-                       </div>
-                       <input type="checkbox" id="unisex" checked>
-                       <label for="unisex">Unisex</label>
-                       <input type="checkbox" id="accessible" checked>
-                       <label for="ada-accessible">Accessible</label>
-                       <input type="submit" value="Find a washroom" id="submit" name="submit">
-                   </form>
-                   <div class="washroomContainer" id="washrooms">
-
-                   </div>
-
-
-                </div><!-- end sidebar-->
-       
-               <div class="mapContainer" id="map"></div>    
-           </div>
-   
-<<<<<<< HEAD
-    <header>
-        <img src="images/location_searching.svg" class= "logo" alt="location search icon">
+<div class="app">
+<header>
+    <div class="logo-container">
+        <img src="images/location_searching.svg" class="logo" alt="location search icon">
         <h1>Bonbanho</h1>
-        <h2>find accessible & unisex washrooms</h2>
-    </header>
-    <main>
-        <div class="wrapper">
-            <div class="sidebar">
-                <form action="" id="searchForm">
-                    <label for="search" class="visually-hidden">Search</label>
+    </div>
+    <p>find accessible & unisex washrooms</p>
+</header>
+<main>
+    <div class="wrapper">
+        <div class="sidebar">
+            <form action="" id="searchForm">
+                <label for="search" class="visually-hidden">Search</label>
+                <div class="input-block">
                     <input type="search" placeholder="Search" id="search" name="search" required>
-                    <input type="checkbox" id="unisex" class="visually-hidden" checked><label for="unisex">Unisex</label>
-                    <input type="checkbox" id="accessible" class="visually-hidden" checked>
-                    <label for="ada-accessible">Accessible</label>
-                    <input type="submit" value="Find a washroom" id="submit" name="submit">
-                </form>
-                <div class="washroomContainer-container">
-                    <div class="washroomContainer" id="washrooms"></div>
+                    <button class="clear-input">
+                        <i class="fas fa-times" title="Clear input"></i>
+                    </button>
                 </div>
-            </div>
-    
-            <div class="mapContainer" id="map"></div>    
-        </div>
+                <input type="checkbox" id="unisex" checked>
+                <label for="unisex">Unisex</label>
+                <input type="checkbox" id="ada-accessible" checked>
+                <label for="ada-accessible">Accessible</label>
+                <input type="submit" value="Find a washroom" id="submit" name="submit">
+            </form>
 
-    </main>
+                <div class="washroomContainer-container" id="wcContainer">
+                    <div class="washroomContainer accordian-panel" id="washrooms"></div>
+                </div>
+            
+            
+        </div><!-- end sidebar--> 
+        <div class="mapContainer" id="map"></div>
+    </div>
+</main>
+<footer>
+    <p>Created by
+        <a href="https://github.com/jlealess" target="_blank">Jackie Lealess</a> and
+        <a href="https://github.com/lizfaria" target="_blank">Liz Faria</a>. Icons by
+        <a href="https://www.flaticon.com/authors/freepik" target="_blank">Freepik</a>
+    </p>
+</footer>
+</div> <!-- app div end -->
 
-    <footer>
-<p>Created by
-<a href="https://github.com/jlealess" target="_blank">Jackie Lealess</a>
-<a href="https://github.com/jlealess" target="_blank">and
-    <a href="https://github.com/lizfaria" target="_blank">Liz Faria</a></p>
-    </footer>
-=======
-       </main>
+
    
-       <footer>
-           <p>Created by
-               <a href="https://github.com/jlealess" target="_blank">Jackie Lealess</a> and
-               <a href="https://github.com/lizfaria" target="_blank">Liz Faria</a>.
-                Icons by <a href="https://www.flaticon.com/authors/freepik" target="_blank">Freepik</a>
-            </p>
-       </footer>
-   </div>
->>>>>>> 89d92573097244360bcefa110e55e3c3885ec308
+
  
     <script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>

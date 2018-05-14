@@ -70,7 +70,7 @@ form {
             }
         }
 
-        &[type=checkbox] {
+        &[type="checkbox"] {
             display: inline;
             opacity: 0;
             position: absolute;
@@ -88,7 +88,12 @@ form {
                 font-weight: bold;
                 margin: 20px 10px 20px 0;
                 padding: 10px 20px 10px 45px;
-    
+
+                @media(max-width:768px) {
+                    margin: 15px auto;
+                    padding: 10px 14px 10px 45px;
+                }
+                
                 &[for='ada-accessible'] {
                     background-image: url('../images/wheelchair.png');
                 }
@@ -96,13 +101,16 @@ form {
                 &[for='unisex'] {
                     background-image: url('../images/unisex.png');
                 }
+
+                &:hover {
+                cursor: pointer;
+                }
             }
 
             &:checked+label {
                 border: 2px solid #A770EF;
                 color: #A770EF;
             }
-
         }
     }
 }
@@ -133,6 +141,10 @@ header {
     justify-content: space-between;
     padding: 0 0 5px 0;
 
+    @media(max-width:768px) {
+        display:block;
+    }
+
     .logo {
         display: block;
         width: 45px;
@@ -142,6 +154,10 @@ header {
         align-items: center;
         display: flex;
         margin-left: 10px;
+
+        @media(max-width:768px) {
+            margin-left:25px;
+        }
     }
     h1 {
         text-align: left;
@@ -159,12 +175,22 @@ header {
         font-family: $header-font;
         font-weight: 700;
         margin: 0 25px 0 0;
+        
+        @media(max-width:768px) {
+            margin-left:25px;
+        }
     }
 }
 
 #map {
     height: 100%;
     width: 100%;
+
+    @media(max-width:768px) {
+        display: block;
+        width:100%;
+        height:300px;
+    }    
 }
 
 .app {
@@ -172,6 +198,11 @@ header {
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr auto;
     height: 100vh;
+
+    @media(max-width:768px) {
+        height: 100%;
+        display:block;
+    }
 }
 
 .features {
@@ -198,6 +229,9 @@ header {
 .mapContainer {
     grid-column: 1;
     grid-row: 1;
+    @media(max-width: 768px) {
+        position:absolute;
+    }    
 }
 
 .mapContainer,
@@ -207,7 +241,10 @@ header {
 
 .search-title {
     font-size: 1.8rem;
-    margin-bottom: 0.5rem;
+    margin: 10px 0 0 0;
+    @media(max-width:480px) {
+            font-size:1rem;
+        }
 }
 
 .sidebar {
@@ -220,29 +257,29 @@ header {
     z-index: 10;
 }
 
-<<<<<<< HEAD
 .washroomContainer-container {
     position:relative;
 }
-=======
->>>>>>> 901735e7cee85fd3d6b106a45dddc25d5e0e6de3
 
 .washroomContainer {
     grid-column: -1;
-<<<<<<< HEAD
     overflow-y: scroll;
     position: absolute;
-    top: 2%;
+    top: 0;
     bottom:0;
     left: 0;
-=======
-    overflow-y: auto;
->>>>>>> 89d92573097244360bcefa110e55e3c3885ec308
+
+    @media(max-width:768px) {
+        position: relative;
+        display:none;
+    }
     
     h2 {
         font-size: 1.6rem;
         margin: 0 0 0.5rem 0;
+
     }
+    
     p {
         font-size: 1.4rem;
         margin: 0 0.5rem 0 0;
@@ -309,6 +346,12 @@ header {
     height: 100%;
     margin: 0 auto;
     overflow: hidden;
+
+    @media(max-width:768px) {
+        grid-template-columns: 1fr 1fr;
+        overflow: auto;
+        display:block;
+    }
 }
 
 

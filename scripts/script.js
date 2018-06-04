@@ -79,7 +79,6 @@ app.markers = [];
 
 app.openMarker = function(id) {
     console.log(id);
-    //console.log(app.markers);
 
     let match = {};
 
@@ -91,15 +90,8 @@ app.openMarker = function(id) {
     }
 
     console.log(match);
+    app.markers.map((marker) => { marker.infoWindow.close() });
     match.infoWindow.open(app.myMap, match);
-
-    //console.log(match[0]);
-
-
-
-    // get the ID of the thing we clicked --> make the h2 clickable
-    // look through the array of app.markers to find a matching markerId
-    // use infoWindow.open() to open it
 }
 
 app.addMarker = function(latitude, longitude, location, address, id) {
@@ -157,7 +149,7 @@ app.displayWashroom = function(washrooms) {
     //console.log(washrooms);
 
     _.uniq(washrooms,(washroom) => washroom.street.split(' ').splice(0,2).join(' ').toLowerCase()).forEach((washroom) => {
-        const $name = $(`<h2>`).text(titleCase(washroom.name));
+        const $name = $(`<h2 class='place-name'>`).text(titleCase(washroom.name));
         $name.on('click', function() {
             app.openMarker(washroom.id);
         });
@@ -171,7 +163,7 @@ app.displayWashroom = function(washrooms) {
         const washroomLong = washroom.longitude;
         // const mapURL = `https://www.google.com/maps/search/?api=1&query=${washroomLat},${washroomLong}`;
         const mapURL = `https://www.google.com/maps/search/?api=1&query=${streetAddress}+${city}`;
-        const $address = $('<p>').html(`<a href="${mapURL}" target="_blank">${titleCase(streetAddress)}, ${city}</a>`);
+        const $address = $('<p>').html(`${titleCase(streetAddress)}, ${city}`);
 
         const $washroomInnerContent = $('<div class="washroom-inner-content">');
         $washroomInnerContent.append($name, $address);

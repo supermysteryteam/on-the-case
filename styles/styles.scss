@@ -3,6 +3,7 @@
 
 $body-font: 'Montserrat', sans-serif;
 $header-font: 'Roboto Slab', serif;
+$link-color: darken(#A770EF, 10);
 $main-gradient: linear-gradient(to right, #FDB99B, #CF8BF3, #A770EF);
 
 $black: #474747;
@@ -12,14 +13,14 @@ html {
 }
 
 body {
-    background: #A770EF;
     /* fallback for old browsers */
-
+    
     background: -webkit-linear-gradient(to right, #FDB99B, #CF8BF3, #A770EF);
     /* Chrome 10-25, Safari 5.1-6 */
-
+    
     background: linear-gradient(to right, #FDB99B, #CF8BF3, #A770EF);
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #CF8BF3;
     font-family: $body-font;
     font-size: 1.6rem;
 
@@ -132,6 +133,11 @@ footer {
         margin: 5px;
         padding: 0;
         text-align: center;
+
+        a:link,
+        a:visited {
+            color: darken($link-color, 20);
+        }
     }
 }
 header, footer {
@@ -169,17 +175,18 @@ header {
         font-family: $header-font;
         color: darken($black, 5%);
         font-size: 3rem;
-        margin: 5px 2px 0;
-        padding: 0;
         font-weight: 700;
+        margin: 0 2px 0;
+        padding: 0;
         display: inline-block;
     }
     p {
         padding: 0; // margin: 0 0 0 10px;
-        color: rgba(255,255,255,0.9);
+        color: rgba(0,0,0,0.9);
         font-family: $header-font;
+        font-size: 2.2rem;
         font-weight: 700;
-        margin: 0 25px 0 0;
+        margin: 5px 25px 0 0;
         
         @media(max-width:768px) {
             margin-left:25px;
@@ -300,8 +307,13 @@ header {
     }
     
     h2 {
+        color: $link-color;
         font-size: 1.6rem;
         margin: 0 0 0.5rem 0;
+
+        &:hover {
+            cursor: pointer;
+        }
 
     }
     
@@ -311,7 +323,7 @@ header {
     }
     a {
         text-decoration: none;
-        color: inherit;
+        color: $link-color;
     }
     
     & > div {
@@ -351,7 +363,7 @@ header {
         .toggle-more-info {
             background-color: transparent;
             border: none;
-            color: #A770EF;
+            color: $link-color;
             font-size: 1.4rem;
             font-weight: 700;
             padding: 0;

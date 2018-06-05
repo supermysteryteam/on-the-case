@@ -239,6 +239,14 @@ header {
 
 }
 
+.loader {
+    align-items: center;
+    color: $black;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+}
+
 .mapContainer {
     grid-column: 1;
     grid-row: 1;

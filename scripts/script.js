@@ -23,8 +23,6 @@ app.getCoordinates = function (search) {
 app.getWashroomsByCoords = function (latitude, longitude) {
     const unisexVal = $('#unisex').prop('checked');
     const accessibleVal = $('#accessible').prop('checked');
-    //console.log(`Unisex: ${unisexVal}; Accessible: ${accessibleVal}`);
-
 
     $.ajax({
         url: 'https://www.refugerestrooms.org:443/api/v1/restrooms/by_location.json',
@@ -72,7 +70,7 @@ app.addInitialMarker = function(latitude, longitude, location) {
             url: purpleIcon,
             scaledSize: new google.maps.Size(20,20)
         }
-});
+    });
 };
 
 app.markers = [];
@@ -106,7 +104,7 @@ app.addMarker = function(latitude, longitude, location, address, id) {
         }
     });
     
-    let infoWindowContent = `<p>${location}</p>`
+    let infoWindowContent = `<h3>${location}</h3>`
     if (address) {
         infoWindowContent += `<p>${address}</p>`
     }
@@ -124,17 +122,6 @@ app.addMarker = function(latitude, longitude, location, address, id) {
 
 
     app.markers.push(marker);
-   // console.log(app.markers);
-    //console.log(marker);
-
-    // go through and close any markers that are open
-    // put in array of markers that you can loop through eventually
-    // create app.markers array
-    // marker is an object
-    // create a function that loops through all markers and closes them
-    // iterate through array and look for ID
-    // put infoWindow and marker together in object
-
 }
 
    
@@ -236,8 +223,6 @@ app.events = function() {
         e.preventDefault();
         const sibling = $(this).siblings('input').val('');
     });
-
-
     
     $('.sidebar').on('click', '.accordian-control', function(e) {
         e.stopPropagation();
@@ -252,7 +237,6 @@ app.events = function() {
             $(this).text("Show List Results");
             app.accordianDisplay = true;
         }
-
     });
 }
 
@@ -261,6 +245,7 @@ app.init = function () {
     app.events();
     app.getLocation();
 }
+
 // 3. create a document ready to store it all in
 $(function () {
     app.init();

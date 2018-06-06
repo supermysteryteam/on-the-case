@@ -136,7 +136,7 @@ app.displayWashroom = function(washrooms) {
     //console.log(washrooms);
 
     _.uniq(washrooms,(washroom) => washroom.street.split(' ').splice(0,2).join(' ').toLowerCase()).forEach((washroom) => {
-        const $name = $(`<h2 class='place-name'>`).text(titleCase(washroom.name));
+        const $name = $(`<h2 class='place-name'>`).html(`<a href='#'>${titleCase(washroom.name)}</a>`);
         $name.on('click', function() {
             app.openMarker(washroom.id);
         });
